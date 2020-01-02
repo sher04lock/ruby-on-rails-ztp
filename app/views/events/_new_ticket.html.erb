@@ -42,10 +42,9 @@
   </div>
   
   <div class="field">
-    <%= form.label :event_id %><br />
-    <%= form.select :event_id, options_for_select(@events.map{|e| [ e[0,2].join(' - '), e[2] ]}, @ticket.event_id) %>
+    <%= form.hidden_field :event_id %>
+
   </div>
-  
 
   <div class="actions">
     <%= form.submit %>

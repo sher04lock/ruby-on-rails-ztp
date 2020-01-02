@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_events, only: [:show, :edit, :update, :create]
 
   # GET /tickets
   # GET /tickets.json
@@ -25,7 +26,7 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
-
+    
     respond_to do |format|
       if @ticket.save
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
@@ -66,9 +67,13 @@ class TicketsController < ApplicationController
     def set_ticket
       @ticket = Ticket.find(params[:id])
     end
+    
+    def set_events
+      @events = Event.order(:event_date).pluck(:event_date, :artist, :id)
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address)
+      params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address, :phone, :event_id)
     end
 end
