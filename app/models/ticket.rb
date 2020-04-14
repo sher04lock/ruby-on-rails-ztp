@@ -7,4 +7,5 @@ class Ticket < ApplicationRecord
     # length => { :minimum => 1 }
     
     belongs_to :event
+    belongs_to :user
 end
